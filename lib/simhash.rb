@@ -20,6 +20,9 @@ module Simhash
     /(\s|\d|\W|\302\240| *— *|[«»…\-–—]| )+/u
   end
   
+  def similarity(hash1, hash2, size=64)
+    1 - (hash1 ^ hash2).to_s(2).count("1")/size.to_f
+  end
   
   def self.hash(tokens, options={})
     hashbits = options[:hashbits] || 64
